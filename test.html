@@ -58,7 +58,9 @@
                     user_password: pwd.value
                 },
                 success: function (res) {
-                    console.log(res)
+                    if(res === 'ok'){
+                        location.href = 'https://nicksun666.club'
+                    }
                 }
             })
         }
