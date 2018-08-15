@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+用户名：<input id="name" type="text">
+密码：<input id="pwd" type="password">
+<button id="login">登录</button>
+<button  id="register">注册</button>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script>
+    // function init() {
+    //     let arr = [1, 1,2,2,3,3];
+    //     for(let i = 0;i<arr.length;i++){
+    //         for(let j = i+1;j<arr.length;j++){
+    //             if(arr[i]===arr[j]){
+    //                 console.log(arr[i])
+    //             }
+    //         }
+    //     }
+    // }
+    //
+    // init();
+    $(function () {
+        function register(){
+            let name = document.getElementById('name')
+            let pwd = document.getElementById('pwd')
+            $.ajax({
+                url: 'http://localhost:3000/register',
+                method: 'POST',
+                data: {
+                    user_name: name.value,
+                    user_password: pwd.value
+                },
+                success: function (res) {
+                    console.log(res)
+                  //  alert(res)
+                },
+                error:function(err){
+                  //  console.log(err)
+                }
+            })
+        }
+        function login(){
+            let name = document.getElementById('name')
+            let pwd = document.getElementById('pwd')
+            $.ajax({
+                // headers:{
+                //     'Content-Type': 'text/html'
+                // },
+                url: 'http://localhost:3000/login',
+                method: 'POST',
+                data: {
+                    user_name: name.value,
+                    user_password: pwd.value
+                },
+                success: function (res) {
+                    console.log(res)
+                }
+            })
+        }
+        $('#login').click(function(){
+            login();
+        });
+        $('#register').click(function(){
+            register();
+        })
+    })
+</script>
+</html>

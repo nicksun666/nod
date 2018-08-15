@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>experss</title>
+</head>
+<body>
+<div>asd</div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script>
+    $(function(){
+        // if('caches' in window){
+        //    // alert('1')
+        //     caches.open('/lottery.do').then(res=>{
+        //         console.log(res.keys)
+        //     })
+        // }else{
+        //   //  alert('2')
+        // }
+        $.ajax({
+            url: '/lottery2/lottery2.do',
+            type: 'GET',
+            success: function(res){
+                console.log(res)
+            }
+        })
+    })
+</script>
+</body>
+</html>

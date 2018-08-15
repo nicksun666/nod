@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        .mask {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            background: rgba(0, 0, 0, .3);
+        }
+
+        .test {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: lightblue;
+        }
+
+        .test2 {
+            width: 200px;
+            height: 200px;
+            background: rebeccapurple;
+        }
+        .test3 {
+            width: 200px;
+            height: 200px;
+            background: aquamarine;
+        }
+    </style>
+</head>
+<body>
+<div class="test">1
+</div>
+<div class="test test2">2</div>
+<div class="test test3">3</div>
+<script type="text/babel">
+    // class Person {
+    //     constructor(x, y) {
+    //         this.x = x
+    //         this.y = y
+    //     }
+    //     toString(){
+    //         return `名字：${this.x}性别：${this.y}`
+    //     }
+    // }
+    // let person = new Person('lisa','男')
+    // alert(person.toString())
+</script>
+<script type="text/javascript">
+    // 函数内this指向调用该函数对象,objAge:this.age中this指向window对象
+    // let name ='小王',age=17;
+    // let obj ={
+    //     name: '小张',
+    //     objAge:this.age,
+    //     myFun:function(){
+    //         console.log(this.name + '年龄'+this.age)
+    //     }
+    // }
+    // console.log(obj.objAge);
+    // obj.myFun()
+    //
+    // var mult =function(){
+    //     console.log('开始机选乘积');
+    //     var a= 1;
+    //     for (var i=0,l=arguments.length;i<1;i++){
+    //         a= a*arguments[i]
+    //     }
+    //     console.log(a)
+    // }
+    // var proxyMult =(function(){
+    //     var cahce = {};
+    //     return function(){
+    //         var args = Array.prototype.join.call(arguments,',');
+    //         if(args in cache){
+    //             return cachep[args];
+    //         }
+    //         return cachep[args] = mult.apply(this,arguments);
+    //     }
+    // }())
+    // proxyMult(1,2,3,4);
+    // proxyMult(1,2,3,4);
+    // call（this）时this指向window所以在指向全局name=‘asd’时就会有值
+    // var name='asd'
+    // var personA = {
+    //     name: 'XL',
+    //     sayName: function (hobby) {
+    //         console.log(this.name + 'likes' + hobby)
+    //     }
+    // };
+    // personA.sayName('basketball')
+    // var personB = {
+    //     name: 'xl'
+    // }
+    // personA.sayName.call(this, 'basketball');
+    // personA.sayName.apply(personB, ['basketball'])
+    //原型
+    // function Animal(species){
+    //     this.species = '动物'
+    // }
+    // function Cat(name,color){
+    //     this.name = name;
+    //     this.color = color;
+    // }
+    // let cat = new Cat()
+    // console.log(Cat.constructor)
+    // console.log(cat.constructor)
+    // console.log(cat.constructor.prototype)
+    // console.log(typeof  cat)
+    // var cat =new Cat('咪','黄')
+    // Cat.prototype = new Animal();
+    // console.log( Cat.prototype.constructor)
+    // Cat.prototype.constructor = Cat
+    // var cat =new Cat('咪','黄')
+    // console.log(JSON.stringify(cat))
+</script>
+<script src="./node_modules/babel-core/browser.min.js"></script>
+<script src="./plugin.js"></script>
+<script type="text/javascript">
+    // window.onload = function (e) {
+    //     document.body.onmousemove = function (e) {
+    //         alert(e.clientX)
+    //     }
+    // }
+    // document.getElementById('test').onclick=function(){
+    //     alert('123')
+    // }
+    // var mObj = new Modal('#test');
+    //  mObj.setBg('blue')
+    var obj = new A('test')
+    var obj2 = new A('test2')
+    var obj3 = new A('test3')
+</script>
+</body>
+</html>
