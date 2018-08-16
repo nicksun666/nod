@@ -23,25 +23,31 @@ let server = http.createServer(function (req, res) {
     req.on('data', function (chunk) {
         body += chunk
         body = qs.parse(body)
-        if(req.url === '/login'){
-            connection.query(`select * from user_info where user_name='${body.user_name}'`, function (err, result) {
+        if (req.url === '/login') {
+            connection.query(`select count(*) from user_info where user_name='${body.user_name}'`, function (err, result) {
+                console.log(result);
                 if (err) {
                     console.log('[SELECT ERROR] - ', err.message);
                     return;
                 }
-                if(result){
-                    if(result[0].user_name === body.user_name && result[0].user_password === ~~(body.user_password)){
-                        res.end('ok')
-                    }else{
-                        res.end('用户名或密码不正确')
+                if (result) {
+                    if (result[0]['count(*)'] === 0) {
+                        res.end('用户名不存在');
+                    } else {
+                        connection.query(`select * from user_info where user_name='${body.user_name}'`, function (err, result) {
+                            if (result[0].user_name === body.user_name && result[0].user_password === ~~(body.user_password)) {
+                                res.end('ok')
+                            } else {
+                                res.end('用户名或密码不正确')
+                            }
+                        })
                     }
                 }
-                console.log(result);
             });
-        }else if(req.url === '/register'){
+        } else if (req.url === '/register') {
             connection.query(`select * from user_info where user_name='${body.user_name}'`, function (err, result) {
                 if (err) {
-                    console.log('err',err)
+                    console.log('err', err)
                     return
                 }
                 if (result.length === 0) {
@@ -53,12 +59,12 @@ let server = http.createServer(function (req, res) {
                         }
                         console.log(result);
                     });
-                }else{
+                } else {
                     res.end('用户名重复');
                 }
             });
         }
     })
-   // connection.end();
+    // connection.end();
 }).listen(3000, 'localhost', function () {
 })
