@@ -20,6 +20,21 @@ let server = http.createServer(function (req, res) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
     let body = '';
+    if (req.url === '/getUserInfo') {
+        connection.query(`select * from user_info`, (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            let arr = []
+            if (result) {
+                for (let i of result) {
+                    arr.push(i)
+                }
+                res.write(JSON.stringify(arr) + '')
+                res.end()
+            }
+        })
+    }
     req.on('data', function (chunk) {
         body += chunk
         body = qs.parse(body)
@@ -44,7 +59,8 @@ let server = http.createServer(function (req, res) {
                     }
                 }
             });
-        } else if (req.url === '/register') {
+        }
+        if (req.url === '/register') {
             connection.query(`select * from user_info where user_name='${body.user_name}'`, function (err, result) {
                 if (err) {
                     console.log('err', err)
@@ -57,12 +73,27 @@ let server = http.createServer(function (req, res) {
                             console.log('[SELECT ERROR] - ', err.message);
                             return;
                         }
+                        if (result) {
+                            res.end('注册成功')
+                        }
                         console.log(result);
                     });
                 } else {
                     res.end('用户名重复');
                 }
             });
+        }
+        if (req.url === '/editUserInfo') {
+            connection.query(`update user_info set user_name = '${body.user_name}', user_password = '${body.user_password}' where user_id = '${body.user_id}'`, (err, result) => {
+                if(err){
+                    console.log(err)
+                    return
+                }
+                if(result){
+                    res.end('ok')
+                    console.log(result, 'res')
+                }
+            })
         }
     })
     // connection.end();
